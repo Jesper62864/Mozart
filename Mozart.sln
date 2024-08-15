@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mozart", "Mozart\Mozart.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiceLib", "DiceLib\DiceLib.csproj", "{2815CDF1-AE65-48DB-B910-46EEAA098B68}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dice Game", "Dice Game\Dice Game.csproj", "{8893BEAF-A9C4-4398-994E-A2107D5045B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{2815CDF1-AE65-48DB-B910-46EEAA098B68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2815CDF1-AE65-48DB-B910-46EEAA098B68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2815CDF1-AE65-48DB-B910-46EEAA098B68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8893BEAF-A9C4-4398-994E-A2107D5045B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8893BEAF-A9C4-4398-994E-A2107D5045B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8893BEAF-A9C4-4398-994E-A2107D5045B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8893BEAF-A9C4-4398-994E-A2107D5045B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
