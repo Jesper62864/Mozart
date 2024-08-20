@@ -36,4 +36,9 @@ namespace DiceLib
             return LastRoll;
         }
     }
+
+    public class YahtzeeDice : Dice
+    {
+        public bool isLocked = false;
+    }
 }
