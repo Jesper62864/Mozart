@@ -1,4 +1,6 @@
 ﻿using DiceLib;
+using System.Diagnostics;
+using Yahtzee.Classes;
 
 namespace Yahtzee
 {
@@ -15,23 +17,29 @@ namespace Yahtzee
                 new YahtzeeDice(),
                 new YahtzeeDice()
             };
+            List<ScoreCategory> ScoreCategories = new List<ScoreCategory>()
+            {
+                new ScoreCategory("Aces", "Any amount of 1s, scores the sum.")
+            };
             int roll = 0;
             int lockedRoll = 0;
+            int lockedDice = -1;
             int[] dieToKeepArray = [0];
 
             for (int turnPhase = 1; turnPhase < 4; turnPhase++)
             {
+                Console.SetCursorPosition(0,0);
                 Console.WriteLine($"== Player 1 Turn: Roll #{turnPhase} ==");
                 Console.WriteLine("Press enter to roll");
-                while (true)
-                {
-                    ConsoleKeyInfo keypress = Console.ReadKey(true);
-                    if (keypress.Key == ConsoleKey.Enter)
-                    {
-                        break;
-                    }
+                //while (true)
+                //{
+                //    ConsoleKeyInfo keypress = Console.ReadKey(true);
+                //    if (keypress.Key == ConsoleKey.Enter)
+                //    {
+                //        break;
+                //    }
 
-                }
+                //}
             
                 Console.WriteLine("\n");
                 Console.Write("|");
@@ -47,50 +55,62 @@ namespace Yahtzee
                     else
                     {
                         lockedRoll = dice.LastRoll;
-                        Console.Write(" "+ lockedRoll + " | ");
+                        Console.Write(" ");
+                        Console.Write(lockedRoll.ToString(), Console.ForegroundColor = ConsoleColor.Red);
+                        Console.Write(" |", Console.ForegroundColor = ConsoleColor.White);
                     }
 
                 }
                 Console.WriteLine("");
                 Console.WriteLine("Keep? (Separate with commas)");
-
-                string dieToKeep = Console.ReadLine();
-                try
+                ConsoleKeyInfo keypress;
+                do
                 {
-                    if (dieToKeep.Contains(",") == false)
+                    keypress = Console.ReadKey(true);
+                    switch (keypress.Key)
                     {
-                        dieToKeepArray = [int.Parse(dieToKeep)];
+                        case ConsoleKey.D1:
+                            lockedDice = 0;
+                            
+                            break;
+                        case ConsoleKey.D2:
+                            lockedDice = 1;
+                            break;
+                        case ConsoleKey.D3:
+                            lockedDice = 2;
+                            break;
+                        case ConsoleKey.D4:
+                            lockedDice = 3;
+                            break;
+                        case ConsoleKey.D5:
+                            lockedDice = 4;
+                            break;
+                        default:
+                            lockedDice = -1;
+                            break;
                     }
-                    else
+                    if (lockedDice != -1)
                     {
-                        dieToKeepArray = dieToKeep.Split(',').Select(int.Parse).ToArray();
-                    }
-
-                }
-                catch
-                {
-                    dieToKeepArray = [0];
-                }
-                foreach (YahtzeeDice dice in Dicebag)
-                {
-                    dice.isLocked = false;
-                }
-                try
-                {
-                    foreach (int i in dieToKeepArray)
-                    {
-                        if (i < 6 || i > 0)
+                        Console.SetCursorPosition(2 + 4 * lockedDice, 4);
+                        if (Dicebag[lockedDice].isLocked == false)
                         {
-                            Dicebag[i - 1].isLocked = true;
+                            Console.Write(Dicebag[lockedDice].LastRoll.ToString(), Console.ForegroundColor = ConsoleColor.Red);
+                            Dicebag[lockedDice].isLocked = true;
                         }
                         else
                         {
-                            Dicebag[i - 1].isLocked = false;
+                            Console.Write(Dicebag[lockedDice].LastRoll.ToString(), Console.ForegroundColor = ConsoleColor.White);
+                            Dicebag[lockedDice].isLocked = false;
                         }
                     }
-                }
-                catch { }
-                Console.WriteLine("\n");
+                    
+                    
+
+                } while (keypress.Key != ConsoleKey.Enter);
+
+
+                Console.WriteLine("\n", Console.ForegroundColor = ConsoleColor.White);
+                Console.Clear();
             }
         }
     }
